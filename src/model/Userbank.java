@@ -7,6 +7,7 @@ package model;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import java.util.HashMap;
 
 
 /**
@@ -15,5 +16,5 @@ import com.google.gson.reflect.TypeToken;
  */
 public class Userbank
 {
-    
+    private HashMap<String, User> userBank;
 }
