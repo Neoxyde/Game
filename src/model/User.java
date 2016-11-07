@@ -31,7 +31,7 @@ public class User
     private int lastPunctuation;
     
     /**
-     * Maps the hashed operations;
+     * Maps the hashed correct operations;
      */
     private HashMap<String, Integer> operations;
     
@@ -40,8 +40,12 @@ public class User
      */
     private int totalOperations;
     
+    /**
+     * Create a new user with all attributes setted to 0.
+     */
     public User()
     {
+	//Set variables to 0
         name = "";
         maxPunctuation = 0;
         lastPunctuation = 0;
@@ -53,9 +57,16 @@ public class User
         totalOperations = 0;
     }
     
+    /**
+     * Create a new user with all attributes setted to 0 but the name.
+     * @param name User's name.
+     */
     public User(String name)
     {
+	//Call default constructor.
         this();
+	
+	//Set the name
         this.name = name;
     }
 
@@ -104,6 +115,10 @@ public class User
         this.totalOperations = totalOperation;
     }
     
+    /**
+     * Add a new operation the the resolved operations list the user has.
+     * @param operation 
+     */
     public void addResolvedOperation(String operation)
     {
         totalOperations++;
@@ -112,6 +127,10 @@ public class User
         operations.put(operation, operations.get(operation) + 1);
     }
     
+    /**
+     * Add a failed operation to the user. Note that this won't add an operation
+     * to the operations list the user has.
+     */
     public void addWrongOperation()
     {
         totalOperations++;
