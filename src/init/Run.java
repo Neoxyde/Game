@@ -5,6 +5,9 @@
  */
 package init;
 
+import java.io.File;
+import model.Userbank;
+
 /**
  *
  * @author David Darío Del Prado González
@@ -13,6 +16,9 @@ public class Run
 {
     public static void main(String[] args)
     {
+        File file = new File("..\\Game\\src\\model\\data.json");
+        Userbank userbank = new Userbank(file);
+        
         
     }
 }

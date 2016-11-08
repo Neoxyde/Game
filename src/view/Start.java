@@ -33,16 +33,18 @@ public class Start extends javax.swing.JPanel
 
         btnStart = new javax.swing.JButton();
         txtName = new javax.swing.JTextField();
+        lblTitle = new javax.swing.JLabel();
 
         setLayout(new java.awt.GridBagLayout());
 
         btnStart.setText("Entrar");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipadx = 4;
         gridBagConstraints.ipady = 4;
+        gridBagConstraints.weighty = 0.5;
         add(btnStart, gridBagConstraints);
 
         txtName.setText("Nombre");
@@ -59,12 +61,21 @@ public class Start extends javax.swing.JPanel
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipadx = 5;
-        gridBagConstraints.ipady = 5;
+        gridBagConstraints.ipadx = 50;
+        gridBagConstraints.ipady = 1;
         add(txtName, gridBagConstraints);
+
+        lblTitle.setFont(new java.awt.Font("DejaVu Sans", 1, 36)); // NOI18N
+        lblTitle.setText("Reto Matemático");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.ipadx = 1;
+        gridBagConstraints.ipady = 50;
+        gridBagConstraints.weighty = 1.0;
+        add(lblTitle, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtNameFocusGained(java.awt.event.FocusEvent evt)//GEN-FIRST:event_txtNameFocusGained
@@ -86,6 +97,7 @@ public class Start extends javax.swing.JPanel
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnStart;
+    private javax.swing.JLabel lblTitle;
     private javax.swing.JTextField txtName;
     // End of variables declaration//GEN-END:variables
 }

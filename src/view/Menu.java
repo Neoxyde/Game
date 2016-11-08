@@ -40,38 +40,53 @@ public class Menu extends javax.swing.JPanel
         setLayout(new java.awt.GridBagLayout());
 
         btnPlay.setText("Jugar");
+        btnPlay.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
         add(btnPlay, gridBagConstraints);
 
         btnUserStats.setText("Estadísticas del Usuario");
+        btnUserStats.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
         add(btnUserStats, gridBagConstraints);
 
         btnGlobalStats.setText("Estadísticas globales");
+        btnGlobalStats.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
         add(btnGlobalStats, gridBagConstraints);
 
         btnLogout.setText("Cerrar sesión");
+        btnLogout.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
         add(btnLogout, gridBagConstraints);
 
         btnExit.setText("Salir");
+        btnExit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
         add(btnExit, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
