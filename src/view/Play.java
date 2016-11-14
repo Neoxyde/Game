@@ -7,7 +7,7 @@ package view;
 
 /**
  *
- * @author dam2
+ * @author David Darío Del Prado González
  */
 public class Play extends javax.swing.JPanel
 {

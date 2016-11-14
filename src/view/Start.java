@@ -7,19 +7,31 @@ package view;
 
 /**
  *
- * @author David
+ * @author David Darío Del Prado González
  */
 public class Start extends javax.swing.JPanel
 {
+    
+    Frame controller;
 
     /**
-     * Creates new form Inicio
+     * Creates new form Start
      */
     public Start()
     {
-	initComponents();
+        initComponents();
     }
-
+    
+    public Start(Frame controller)
+    {
+        this();
+        
+        //Reference the frame as the controller
+        this.controller = controller;                
+    }
+    
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -38,6 +50,13 @@ public class Start extends javax.swing.JPanel
         setLayout(new java.awt.GridBagLayout());
 
         btnStart.setText("Entrar");
+        btnStart.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btnStartActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
@@ -80,19 +99,28 @@ public class Start extends javax.swing.JPanel
 
     private void txtNameFocusGained(java.awt.event.FocusEvent evt)//GEN-FIRST:event_txtNameFocusGained
     {//GEN-HEADEREND:event_txtNameFocusGained
+        //If the text is equal to the hint, empty it
         if (txtName.getText().equalsIgnoreCase("Nombre"))
-	{
-	    txtName.setText("");
-	}
+        {
+            txtName.setText("");
+        }
     }//GEN-LAST:event_txtNameFocusGained
 
     private void txtNameFocusLost(java.awt.event.FocusEvent evt)//GEN-FIRST:event_txtNameFocusLost
     {//GEN-HEADEREND:event_txtNameFocusLost
+        //If the text is empty, fill it with the hint text
         if (txtName.getText().equalsIgnoreCase(""))
-	{
-	    txtName.setText("Nombre");
-	}
+        {
+            txtName.setText("Nombre");
+        }
     }//GEN-LAST:event_txtNameFocusLost
+
+    private void btnStartActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnStartActionPerformed
+    {//GEN-HEADEREND:event_btnStartActionPerformed
+        //Call the controller's login method
+        String text = txtName.getText();
+        controller.logIn(text);
+    }//GEN-LAST:event_btnStartActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

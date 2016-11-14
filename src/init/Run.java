@@ -7,6 +7,7 @@ package init;
 
 import java.io.File;
 import model.Userbank;
+import view.Frame;
 
 /**
  *
@@ -18,7 +19,7 @@ public class Run
     {
         File file = new File("..\\Game\\src\\model\\data.json");
         Userbank userbank = new Userbank(file);
-        
+        Frame frame = new Frame(userbank);
         
     }
 }

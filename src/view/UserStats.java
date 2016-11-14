@@ -7,7 +7,7 @@ package view;
 
 /**
  *
- * @author dam2
+ * @author David Darío Del Prado González
  */
 public class UserStats extends javax.swing.JPanel
 {

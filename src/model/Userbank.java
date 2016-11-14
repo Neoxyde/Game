@@ -158,7 +158,7 @@ public class Userbank
     {
         try
         {
-            Gson gson = new Gson();
+            gson = new Gson();
             FileWriter fileWriter = new FileWriter(file);
             gson.toJson(userList, fileWriter);
             fileWriter.flush();

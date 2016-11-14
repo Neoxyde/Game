@@ -7,7 +7,7 @@ package view;
 
 /**
  *
- * @author David
+ * @author David Darío Del Prado González
  */
 public class Menu extends javax.swing.JPanel
 {
@@ -36,6 +36,7 @@ public class Menu extends javax.swing.JPanel
         btnGlobalStats = new javax.swing.JButton();
         btnLogout = new javax.swing.JButton();
         btnExit = new javax.swing.JButton();
+        lblGreetings = new javax.swing.JLabel();
 
         setLayout(new java.awt.GridBagLayout());
 
@@ -43,7 +44,7 @@ public class Menu extends javax.swing.JPanel
         btnPlay.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
@@ -53,7 +54,7 @@ public class Menu extends javax.swing.JPanel
         btnUserStats.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
@@ -63,7 +64,7 @@ public class Menu extends javax.swing.JPanel
         btnGlobalStats.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
@@ -73,7 +74,7 @@ public class Menu extends javax.swing.JPanel
         btnLogout.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridy = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
@@ -83,19 +84,31 @@ public class Menu extends javax.swing.JPanel
         btnExit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridy = 5;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
         add(btnExit, gridBagConstraints);
+
+        lblGreetings.setText("jLabel1");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        add(lblGreetings, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
-
+    
+    public void setLblGreetingsText(String text)
+    {
+        lblGreetings.setText(text);
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnExit;
     private javax.swing.JButton btnGlobalStats;
     private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnPlay;
     private javax.swing.JButton btnUserStats;
+    private javax.swing.JLabel lblGreetings;
     // End of variables declaration//GEN-END:variables
 }

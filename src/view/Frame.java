@@ -5,6 +5,10 @@
  */
 package view;
 
+import java.awt.CardLayout;
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import javax.swing.JPanel;
 import model.Userbank;
 
 /**
@@ -20,6 +24,12 @@ public class Frame extends javax.swing.JFrame
     private GlobalStats globalStatsView;
     private UserStats userStatsView;
     
+    //Create the layout
+    private CardLayout cardLayout;
+    
+    //Create the panel to contain the cards
+    private JPanel cards;
+    
     //Create the userbank
     private Userbank userbank;
 
@@ -28,21 +38,17 @@ public class Frame extends javax.swing.JFrame
      */
     public Frame()
     {
+        //Initialize the components
         initComponents();
         
-        //Instantiate the panels
-        startView   = new Start();
-        playView    = new Play();
-        menuView    = new Menu();
-        globalStatsView = new GlobalStats();
-        userStatsView   = new UserStats();
+        //Initialize the panels and reference them.
+        initPanels();
         
-        //Set panels as cards for the layout
-        this.getContentPane().add(startView);
-        this.getContentPane().add(playView);
-        this.getContentPane().add(menuView);
-        this.getContentPane().add(globalStatsView);
-        this.getContentPane().add(userStatsView);
+        //Show the start panel
+        cardLayout.show(cards, "Start");     
+        
+        //Collocate the window and set it visible
+        initWindow();
     }
     
     public Frame(Userbank userbank)
@@ -51,6 +57,79 @@ public class Frame extends javax.swing.JFrame
         
         //Reference the userbank
         this.userbank = userbank;
+    }
+    
+    
+    
+    
+    /**
+     * Logs in the program with the username given and 
+     * @param username 
+     */
+    void logIn(String username)
+    {
+        //Add the user and check if it already existed, then set the Menu personalized text
+        if (userbank.addUser(username))
+        {
+            menuView.setLblGreetingsText("Hola, " + username);
+        }
+        else
+        {
+            menuView.setLblGreetingsText("Hola de nuevo, " + username);
+        }
+        
+        //Swap to Menu JPanel
+        cardLayout.show(cards, "Menu");
+    }
+    
+    /**
+     * Instantiates all the panels and set them as cards for the <ii>CardLayout</ii>
+     * attribute named <ii>cardLayout</ii>.
+     */
+    private void initPanels()
+    {
+        //Instantiate the panels
+        startView   = new Start();
+        playView    = new Play();
+        menuView    = new Menu();
+        globalStatsView = new GlobalStats();
+        userStatsView   = new UserStats();
+                
+        //Reference the JPanel to the Frame's one
+        cards = (JPanel) this.getContentPane();
+        
+        //Reference the cardLayout to the Frame's one
+        cardLayout = (CardLayout) cards.getLayout();
+        
+        //Set panels as cards for the layout
+        cards.add(startView, "Start");
+        cards.add(playView, "Play");
+        cards.add(menuView, "Menu");
+        cards.add(globalStatsView, "GlobalStats");
+        cards.add(userStatsView, "UserStats");
+    }
+    
+    /**
+     * Sets the Frames size relative to the screen and it's position centered,
+     * then sets the window as enabled and visible.
+     */
+    private void initWindow()
+    {
+        //Get the screen dimensions
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        
+        //Set the preferred window size
+        dim.setSize(dim.getWidth()/2, dim.getHeight()/2);
+        
+        //Set the window size
+        this.setSize(dim);
+        
+        //Center the frame
+        this.setLocationRelativeTo(null);
+        
+        //Set the window visible and enabled
+        this.setVisible(true);
+        this.setEnabled(true);
     }
     
     
