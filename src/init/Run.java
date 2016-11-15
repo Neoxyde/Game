@@ -17,8 +17,8 @@ public class Run
 {
     public static void main(String[] args)
     {
-        File file = new File("..\\Game\\src\\model\\data.json");
-        Userbank userbank = new Userbank(file);
+        File file   = new File("..\\Game\\src\\model\\data.json");
+        Userbank userbank   = new Userbank(file);
         Frame frame = new Frame(userbank);
         
     }

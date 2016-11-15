@@ -13,8 +13,7 @@ import java.util.Random;
  */
 public class Game
 {
-    //Random utility class
-    
+    //Random utility class    
     Random random;
     
     
@@ -61,6 +60,10 @@ public class Game
      */
     private int difficulty;
     
+    private int solution;
+    
+    
+    
     
     //Logic
     
@@ -84,6 +87,25 @@ public class Game
         
         //Generate the operation
         operation = random.nextInt(4);
+        
+        //Calculate the solution based on what operation was randomly generated.
+        switch (operation)
+        {
+            case OPERATION_ADD:
+                solution = operand1 + operand2;
+                break;
+            case OPERATION_SUB:
+                solution = operand1 - operand2;
+                break;
+            case OPERATION_TIMES:
+                solution = operand1 * operand2;
+                break;
+            case OPERATION_DIV:
+                solution = (int) operand1 / operand2;
+                break;
+            default:
+                throw new AssertionError();
+        }
     }
     
     /**
@@ -116,4 +138,40 @@ public class Game
     {
         return operation;
     }
+    
+    public String getStringOperation()
+    {
+        //Aux variable
+        String aux;
+        
+        //Set the aux string depending of what operation was 
+        switch (operation)
+        {
+            case OPERATION_ADD:
+                aux = "+";
+                break;
+            case OPERATION_SUB:
+                aux = "-";
+                break;
+            case OPERATION_TIMES:
+                aux = "x";
+                break;
+            case OPERATION_DIV:
+                aux = "/";
+                break;
+            default:
+                throw new AssertionError();
+        }
+        
+        return aux;
+    }
+
+    public int getSolution()
+    {
+        return solution;
+    }
+    
+    
+    
+    
 }

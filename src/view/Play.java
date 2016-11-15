@@ -5,13 +5,18 @@
  */
 package view;
 
+
 /**
  *
  * @author David Darío Del Prado González
  */
 public class Play extends javax.swing.JPanel
 {
-
+    /**
+     * The frame that contains this panel, and acts as a controller to it.
+     */
+    private Frame controller;
+        
     /**
      * Creates new form Play
      */
@@ -20,6 +25,25 @@ public class Play extends javax.swing.JPanel
         initComponents();
     }
 
+    public Play(Frame controller)
+    {
+        this();
+        
+        //Reference the frame as the controller
+        this.controller = controller; 
+    }
+    
+    public void plotOperation(String[] data)
+    {
+        //Set the labels with the data
+        lblOperand1.setText(data[0]);
+        lblOperation.setText(data[1]);
+        lblOperand2.setText(data[2]);
+        
+        //Clear the answer TextField
+        txtResult.setText("");
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

@@ -11,8 +11,10 @@ package view;
  */
 public class Start extends javax.swing.JPanel
 {
-    
-    Frame controller;
+    /**
+     * The frame that contains this panel, and acts as a controller to it.
+     */
+    private Frame controller;
 
     /**
      * Creates new form Start
@@ -117,8 +119,10 @@ public class Start extends javax.swing.JPanel
 
     private void btnStartActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnStartActionPerformed
     {//GEN-HEADEREND:event_btnStartActionPerformed
-        //Call the controller's login method
+        //Retrieve the text from username textfield
         String text = txtName.getText();
+        
+        //Call the controller login method
         controller.logIn(text);
     }//GEN-LAST:event_btnStartActionPerformed
 

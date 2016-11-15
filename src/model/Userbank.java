@@ -29,7 +29,15 @@ public class Userbank
      */
     private HashMap<String, User> userList;
 
+    /**
+     * JSON utility class to save data to a JSON file.
+     */
     private Gson gson;
+    
+    /**
+     * JSON file to store data
+     */
+    private File file;
 
     public Userbank()
     {
@@ -38,17 +46,20 @@ public class Userbank
 
     public Userbank(File file)
     {
-        //If the JSON file is not null
-        if (file.exists())
+        //Reference the file
+        this.file = file;
+        
+        if (this.file.exists())
         {
-            loadFromJSON(file);
-        } //If the JSON file is null
+            loadFromJSON(this.file);
+        } 
+        //If the JSON file is null
         else
         {
             //Create the JSON file
             try
             {
-                file.createNewFile();
+                this.file.createNewFile();
             } catch (IOException ex)
             {
                 Logger.getLogger(Userbank.class.getName()).log(Level.SEVERE, null, ex);
@@ -128,16 +139,23 @@ public class Userbank
         {
             //Create readers
             FileReader reader = new FileReader(file);
-            BufferedReader bufferedReader = new BufferedReader(reader);
+            BufferedReader input = new BufferedReader(reader);
 
             //Set the line
-            String line = bufferedReader.readLine();
+            String line = input.readLine();
 
             //Set the hashmap from the JSON file.
-            userList = new Gson().fromJson(line, new TypeToken<HashMap<String, User>>()
+            if (line != null)
             {
-            }.getType());
-
+                userList = new Gson().fromJson(line, new TypeToken<HashMap<String, User>>()
+                {
+                }.getType());
+            }
+            else
+            {
+                userList = new HashMap<>();
+            }
+            
             //Close the reader.
             reader.close();
         } catch (FileNotFoundException ex)
@@ -150,11 +168,26 @@ public class Userbank
     }
 
     /**
-     * Saves all the users to a JSON file
+     * Saves all the users to a JSON file.
      *
      * @param file The file to which the users will be saved.
      */
     public void saveToJSON(File file)
+    {
+        try
+        {
+            gson = new Gson();
+            FileWriter fileWriter = new FileWriter(file);
+            gson.toJson(userList, fileWriter);
+            fileWriter.flush();
+            fileWriter.close();
+        } catch (IOException ex)
+        {
+            Logger.getLogger(Userbank.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void saveToJSON()
     {
         try
         {

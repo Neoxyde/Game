@@ -5,10 +5,12 @@
  */
 package view;
 
+import game.Game;
 import java.awt.CardLayout;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import javax.swing.JPanel;
+import model.User;
 import model.Userbank;
 
 /**
@@ -32,6 +34,12 @@ public class Frame extends javax.swing.JFrame
     
     //Create the userbank
     private Userbank userbank;
+    
+    //Create a User object to handle the user operations
+    private User user;
+    
+    //Create a Game object to let the user play
+    private Game game;
 
     /**
      * Creates new form Frame
@@ -45,7 +53,10 @@ public class Frame extends javax.swing.JFrame
         initPanels();
         
         //Show the start panel
-        cardLayout.show(cards, "Start");     
+        cardLayout.show(cards, "Start");  
+        
+        //Instantiate the Game object
+        game = new Game();        
         
         //Collocate the window and set it visible
         initWindow();
@@ -60,11 +71,9 @@ public class Frame extends javax.swing.JFrame
     }
     
     
-    
-    
     /**
-     * Logs in the program with the username given and 
-     * @param username 
+     * Logs the user in the program and shows the Menu panel.
+     * @param username Username the user accessed with.
      */
     void logIn(String username)
     {
@@ -78,8 +87,71 @@ public class Frame extends javax.swing.JFrame
             menuView.setLblGreetingsText("Hola de nuevo, " + username);
         }
         
+        //Reference the auxiliar User object to the User stored in the model
+        user = userbank.getUser(username);
+        
         //Swap to Menu JPanel
         cardLayout.show(cards, "Menu");
+    }
+    
+    void logOut()
+    {
+        //Null out the user object
+        user = null;
+        
+        //Swap to the Start JPanel
+        cardLayout.show(cards, "Start");
+    }
+    
+    /**
+     * Swaps to the Play panel and starts a new Game
+     */
+    void goToGame()
+    {
+        //Swap to Play JPanel
+        cardLayout.show(cards, "Play");
+        
+        // Start the game
+        createOperation();
+    }
+    
+    /**
+     * Swaps to the UserStats panel and loads the user stats
+     */
+    void goToUserStats()
+    {
+        //Swap to UserStats JPanel
+        cardLayout.show(cards, "UserStats");
+        
+        //@TODO Load the user stats
+    }
+    
+    /**
+     * Swaps to the GlobalStats panel and loads the global stats
+     */
+    void goToGlobalStats()
+    {
+        //Swap to GlobalStats JPanel
+        cardLayout.show(cards, "GlobalStats");
+        
+        //@TODO Load the global stats
+    }
+    
+    void createOperation()
+    {
+        //Generate a new operation
+        game.generateOperation();
+        
+        //Generate a string array containing operation data
+        String[] data = new String[3];
+        
+        //Get the operation data and store it in the array
+        data[0] = String.valueOf(game.getOperand1());
+        data[1] = game.getStringOperation();
+        data[2] = String.valueOf(game.getOperand2());
+        
+        //Command the view to plot the operation data
+        playView.plotOperation(data);
     }
     
     /**
@@ -89,9 +161,9 @@ public class Frame extends javax.swing.JFrame
     private void initPanels()
     {
         //Instantiate the panels
-        startView   = new Start();
+        startView   = new Start(this);
         playView    = new Play();
-        menuView    = new Menu();
+        menuView    = new Menu(this);
         globalStatsView = new GlobalStats();
         userStatsView   = new UserStats();
                 
@@ -132,8 +204,6 @@ public class Frame extends javax.swing.JFrame
         this.setEnabled(true);
     }
     
-    
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -147,12 +217,27 @@ public class Frame extends javax.swing.JFrame
     {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter()
+        {
+            public void windowClosing(java.awt.event.WindowEvent evt)
+            {
+                formWindowClosing(evt);
+            }
+        });
         getContentPane().setLayout(new java.awt.CardLayout());
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
 
+    private void formWindowClosing(java.awt.event.WindowEvent evt)//GEN-FIRST:event_formWindowClosing
+    {//GEN-HEADEREND:event_formWindowClosing
+        //Save the user's data.
+        userbank.saveToJSON();
+    }//GEN-LAST:event_formWindowClosing
+    
+    
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
 }
