@@ -51,7 +51,7 @@ public class User
         operations = new HashMap<>();
         operations.put("+", 0);
         operations.put("-", 0);
-        operations.put("*", 0);
+        operations.put("x", 0);
         operations.put("/", 0);
         totalOperations = 0;
     }
@@ -115,8 +115,8 @@ public class User
     }
     
     /**
-     * Add a new operation the the resolved operations list the user has.
-     * @param operation 
+     * Add a new operation to the resolved operations list the user has.
+     * @param operation The type of operation the user resolved
      */
     public void addResolvedOperation(String operation)
     {

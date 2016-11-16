@@ -5,6 +5,12 @@
  */
 package view;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.Timer;
+
+
+
 
 /**
  *
@@ -16,6 +22,13 @@ public class Play extends javax.swing.JPanel
      * The frame that contains this panel, and acts as a controller to it.
      */
     private Frame controller;
+    
+    private Timer timer;
+    
+    /**
+     * Fired every second to update the label timer.
+     */
+    ActionListener updater;
         
     /**
      * Creates new form Play
@@ -23,6 +36,9 @@ public class Play extends javax.swing.JPanel
     public Play()
     {
         initComponents();
+        
+        //Initiate the timer and it's listener
+        initTimer();
     }
 
     public Play(Frame controller)
@@ -33,6 +49,12 @@ public class Play extends javax.swing.JPanel
         this.controller = controller; 
     }
     
+    /**
+     * Plots the operands and operation for the user to solve. Also, clears the
+     * answer textfield.
+     * @param data 3 position <ii>String</ii> array containing the operands and operation.
+     * The order is operand1, operation and operand2.
+     */
     public void plotOperation(String[] data)
     {
         //Set the labels with the data
@@ -40,8 +62,38 @@ public class Play extends javax.swing.JPanel
         lblOperation.setText(data[1]);
         lblOperand2.setText(data[2]);
         
-        //Clear the answer TextField
+        //Clear the answer TextField and the timer label
         txtResult.setText("");
+        lblTimer.setText("30");
+        
+        //Start the Timer
+        timer.start();
+    }
+    
+    /**
+     * Initiates the timer
+     */
+    private void initTimer()
+    {
+        updater = new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                //Get aux variable to check if the label is 0 already
+                int aux = Integer.parseInt(lblTimer.getText()) - 1;
+                
+                //If the label is not zero
+                if (aux >= 0)
+                {
+                    lblTimer.setText(String.valueOf(aux));
+                }
+                //Update the label to show one second less
+                lblTimer.setText(String.valueOf(Integer.parseInt(lblTimer.getText()) - 1));
+            }            
+        };
+        
+        //Set the timer to work with the above updater
+        timer = new Timer(1000, updater);
     }
     
     /**
@@ -61,6 +113,7 @@ public class Play extends javax.swing.JPanel
         lblOperand2 = new javax.swing.JLabel();
         txtResult = new javax.swing.JTextField();
         btnSend = new javax.swing.JButton();
+        lblTimer = new javax.swing.JLabel();
 
         setLayout(new java.awt.GridBagLayout());
 
@@ -72,41 +125,66 @@ public class Play extends javax.swing.JPanel
         gridBagConstraints.ipady = 50;
         add(lblTitle, gridBagConstraints);
 
+        lblOperand1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         lblOperand1.setText("Operand1");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         add(lblOperand1, gridBagConstraints);
 
+        lblOperation.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         lblOperation.setText("+");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.ipady = 50;
         add(lblOperation, gridBagConstraints);
 
+        lblOperand2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         lblOperand2.setText("Operand2");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         add(lblOperand2, gridBagConstraints);
 
         txtResult.setText("jTextField1");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         add(txtResult, gridBagConstraints);
 
         btnSend.setText("Enviar");
+        btnSend.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btnSendActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridy = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         add(btnSend, gridBagConstraints);
+
+        lblTimer.setText("jLabel1");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        add(lblTimer, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnSendActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnSendActionPerformed
+    {//GEN-HEADEREND:event_btnSendActionPerformed
+        // Stop the timer
+        timer.stop();
+        
+        // TODO: User input validation - Maybe a DocumentListener?
+        controller.checkOperation(Integer.parseInt(txtResult.getText()));
+    }//GEN-LAST:event_btnSendActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -114,7 +192,11 @@ public class Play extends javax.swing.JPanel
     private javax.swing.JLabel lblOperand1;
     private javax.swing.JLabel lblOperand2;
     private javax.swing.JLabel lblOperation;
+    private javax.swing.JLabel lblTimer;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JTextField txtResult;
     // End of variables declaration//GEN-END:variables
+
+
+    
 }

@@ -137,6 +137,9 @@ public class Frame extends javax.swing.JFrame
         //@TODO Load the global stats
     }
     
+    /**
+     * Creates an operation for the Play view, using the <ii>Game</ii> class.
+     */
     void createOperation()
     {
         //Generate a new operation
@@ -155,6 +158,35 @@ public class Frame extends javax.swing.JFrame
     }
     
     /**
+     * Checks if the answer given by the user is correct. If it is, then stores
+     * the corresponding punctuation and creates a new operation. If it's not,
+     * then stores the total punctuation and takes the user to their stats.
+     */
+    void checkOperation(int answer)
+    {
+        if (answer == game.getSolution())
+        {
+            // TODO: Store the puntuation and check if its bigger than the current max one.
+            
+            // Add the operation points to the user last punctuation
+            user.setLastPunctuation(user.getLastPunctuation() + game.calculatePoints(20));
+            
+            // Add a resolved operation to the operations list the user has.
+            user.addResolvedOperation(game.getStringOperation());
+            
+            //Increase the difficulty
+            game.increaseDifficulty();
+            
+            // Create a new operation
+            createOperation();
+        }
+        else
+        {
+            
+        }
+    }
+    
+    /**
      * Instantiates all the panels and set them as cards for the <ii>CardLayout</ii>
      * attribute named <ii>cardLayout</ii>.
      */
@@ -162,7 +194,7 @@ public class Frame extends javax.swing.JFrame
     {
         //Instantiate the panels
         startView   = new Start(this);
-        playView    = new Play();
+        playView    = new Play(this);
         menuView    = new Menu(this);
         globalStatsView = new GlobalStats();
         userStatsView   = new UserStats();

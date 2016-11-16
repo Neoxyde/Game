@@ -79,6 +79,7 @@ public class Userbank
      */
     public boolean addUser(String name)
     {
+        //Check if the hashmap has a key. If not, insert a new User with its key.
         if (userList.containsKey(name))
         {
             return false;

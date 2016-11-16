@@ -75,6 +75,7 @@ public class Game
     }
     
     /**
+     * TODO Improve the operation generation
      * Randomly generates the operands and the operation.
      * <br>
      * The operands number of digits is obtained via difficulty digits - 1.
@@ -122,6 +123,51 @@ public class Game
     public void reset()
     {
         difficulty = 10;
+    }
+    
+    public int calculatePoints(int time)
+    {
+        //Aux variable to store the total points
+        int points = 0;
+        
+        //Assign base points depending of what operation was resolved
+        switch (operation)
+        {
+            case OPERATION_ADD:
+                points = 2;
+                break;
+            case OPERATION_SUB:
+                points = 2;
+                break;
+            case OPERATION_TIMES:
+                points = 4;
+                break;
+            case OPERATION_DIV:
+                points = 6;
+                break;
+            default:
+                throw new AssertionError();
+        }
+        
+        //Multiply points and difficulty
+        points = points * difficulty;
+        
+        //Calculate a possible time bonus
+        if (time >= 20)
+        {
+            points = points + (5 * ((int)(points / 10)));
+        }
+        else if (time < 20 && time >= 10)
+        {
+            points = points + (3 * ((int)(points / 10)));
+        }
+        else if (time < 10 && time > 5)
+        {
+            points = points + (2 * ((int)(points / 2)));
+        }
+        
+        //Return the total points
+        return points;
     }
 
     public int getOperand1()
