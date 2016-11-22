@@ -19,10 +19,20 @@ import javax.swing.Timer;
 public class Play extends javax.swing.JPanel
 {
     /**
+     * Sent to the controller to let it know whether the user had already resolved
+     * an operation or not.
+     */
+    private boolean isFirstOperation = true;
+    
+    /**
      * The frame that contains this panel, and acts as a controller to it.
      */
     private Frame controller;
     
+    /**
+     * Timer for bonus points. Also lets the user see how much time he has before
+     * he gets no bonus.
+     */
     private Timer timer;
     
     /**
@@ -82,13 +92,11 @@ public class Play extends javax.swing.JPanel
                 //Get aux variable to check if the label is 0 already
                 int aux = Integer.parseInt(lblTimer.getText()) - 1;
                 
-                //If the label is not zero
+                //If the label is not zero, update the label to show one second less
                 if (aux >= 0)
                 {
                     lblTimer.setText(String.valueOf(aux));
                 }
-                //Update the label to show one second less
-                lblTimer.setText(String.valueOf(Integer.parseInt(lblTimer.getText()) - 1));
             }            
         };
         
@@ -183,7 +191,9 @@ public class Play extends javax.swing.JPanel
         timer.stop();
         
         // TODO: User input validation - Maybe a DocumentListener?
-        controller.checkOperation(Integer.parseInt(txtResult.getText()));
+        controller.checkOperation(Integer.parseInt(txtResult.getText()), Integer.parseInt(lblTimer.getText()), isFirstOperation);
+        
+        isFirstOperation = false;
     }//GEN-LAST:event_btnSendActionPerformed
 
 

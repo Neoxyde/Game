@@ -5,19 +5,33 @@
  */
 package view;
 
+import javax.swing.JTable;
+
 /**
  *
- * @author dam2
+ * @author David Darío Del Prado González
  */
 public class GlobalStats extends javax.swing.JPanel
 {
-
+    /**
+     * The frame that contains this panel, and acts as a controller to it.
+     */
+    private Frame controller;
+    
     /**
      * Creates new form GlobalStats
      */
     public GlobalStats()
     {
         initComponents();
+    }
+    
+    public GlobalStats(Frame controller)
+    {
+        this();
+        
+        // Reference the frame as the controller
+        this.controller = controller;
     }
 
     /**
@@ -29,13 +43,19 @@ public class GlobalStats extends javax.swing.JPanel
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents()
     {
+        java.awt.GridBagConstraints gridBagConstraints;
 
+        jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        globalStatsTable = new javax.swing.JTable();
+        jPanel2 = new javax.swing.JPanel();
+        btnBack = new javax.swing.JButton();
 
-        setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.LINE_AXIS));
+        setLayout(new java.awt.GridBagLayout());
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.LINE_AXIS));
+
+        globalStatsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][]
             {
                 {null, null, null, null},
@@ -48,14 +68,57 @@ public class GlobalStats extends javax.swing.JPanel
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(globalStatsTable);
 
-        add(jScrollPane1);
+        jPanel1.add(jScrollPane1);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 0.8;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 24, 0);
+        add(jPanel1, gridBagConstraints);
+
+        jPanel2.setLayout(new javax.swing.BoxLayout(jPanel2, javax.swing.BoxLayout.LINE_AXIS));
+
+        btnBack.setText("Volver");
+        btnBack.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btnBackActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnBack);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.weighty = 0.2;
+        add(jPanel2, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnBackActionPerformed
+    {//GEN-HEADEREND:event_btnBackActionPerformed
+        // Call the controller's method to show the Menu Panel.
+        controller.goToMenu();
+    }//GEN-LAST:event_btnBackActionPerformed
 
+    
+    /**
+     * Sets the userbank that serves as model to the table
+     * @param userbank 
+     */
+    void setTableModel(model.Userbank userbank)
+    {
+        globalStatsTable.setModel(userbank);
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBack;
+    private javax.swing.JTable globalStatsTable;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }

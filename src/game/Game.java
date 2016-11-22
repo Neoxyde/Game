@@ -20,7 +20,7 @@ public class Game
     //Constants
     
     /**
-     * 
+     * The maximum bonus points the user can have for solving an operation in time
      */
     public static final int SECOND_POINTS = 30;
     /**
@@ -212,6 +212,10 @@ public class Game
         return aux;
     }
 
+    /**
+     * Returns the solution to the current operation
+     * @return an integer with the current operation solution
+     */
     public int getSolution()
     {
         return solution;

@@ -68,6 +68,9 @@ public class Frame extends javax.swing.JFrame
         
         //Reference the userbank
         this.userbank = userbank;
+        
+        //Set the stats cards tables the userbank as tablemodel
+        globalStatsView.setTableModel(userbank);
     }
     
     
@@ -133,8 +136,12 @@ public class Frame extends javax.swing.JFrame
     {
         //Swap to GlobalStats JPanel
         cardLayout.show(cards, "GlobalStats");
-        
-        //@TODO Load the global stats
+    }
+    
+    void goToMenu()
+    {
+        // Swap to Play JPanel
+        cardLayout.show(cards, "Menu");
     }
     
     /**
@@ -162,14 +169,25 @@ public class Frame extends javax.swing.JFrame
      * the corresponding punctuation and creates a new operation. If it's not,
      * then stores the total punctuation and takes the user to their stats.
      */
-    void checkOperation(int answer)
+    void checkOperation(int answer, int timeBonus, boolean isFirstOperation)
     {
         if (answer == game.getSolution())
         {
-            // TODO: Store the puntuation and check if its bigger than the current max one.
+            /*
+                TODO Calculate the points based on how much time the user used to
+                calculate
+            */
             
-            // Add the operation points to the user last punctuation
-            user.setLastPunctuation(user.getLastPunctuation() + game.calculatePoints(20));
+            if (isFirstOperation)
+            {
+                // Add the operation points to the user's last score
+                user.setLastPunctuation(game.calculatePoints(timeBonus));
+            }
+            else
+            {
+                // Add the operation points to the user last punctuation
+                user.setLastPunctuation(user.getLastPunctuation() + game.calculatePoints(timeBonus));
+            }
             
             // Add a resolved operation to the operations list the user has.
             user.addResolvedOperation(game.getStringOperation());
@@ -182,7 +200,7 @@ public class Frame extends javax.swing.JFrame
         }
         else
         {
-            
+            // TODO Logic for wrong anwser
         }
     }
     
@@ -196,7 +214,7 @@ public class Frame extends javax.swing.JFrame
         startView   = new Start(this);
         playView    = new Play(this);
         menuView    = new Menu(this);
-        globalStatsView = new GlobalStats();
+        globalStatsView = new GlobalStats(this);
         userStatsView   = new UserStats();
                 
         //Reference the JPanel to the Frame's one

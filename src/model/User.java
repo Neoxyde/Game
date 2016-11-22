@@ -6,14 +6,20 @@
 package model;
 
 import java.util.HashMap;
+import javax.swing.table.AbstractTableModel;
 
 
 /**
  *
  * @author David Darío Del Prado González
  */
-public class User
+public class User extends AbstractTableModel implements Comparable<User>
 {
+    /**
+     * The number of stats that are relevant for the global rank;
+     */
+    public static final int GLOBAL_STATS_COUNT = 4;
+    
     /**
      * The user's name.
      */
@@ -107,6 +113,12 @@ public class User
     public void setLastPunctuation(int lastPunctuation)
     {
         this.lastPunctuation = lastPunctuation;
+        
+        // Update the max punctuation if the last punctuation is greater
+        if (lastPunctuation > maxPunctuation)
+        {
+            maxPunctuation = lastPunctuation;
+        }
     }
 
     public void setTotalOperation(int totalOperation)
@@ -123,7 +135,7 @@ public class User
         totalOperations++;
         
         //Overwrite the operation and add a resolved operation.
-        operations.put(operation, operations.get(operation) + 1);
+        operations.put(operation, (operations.get(operation) + 1));
     }
     
     /**
@@ -133,6 +145,55 @@ public class User
     public void addWrongOperation()
     {
         totalOperations++;
+    }
+
+    @Override
+    public int getRowCount()
+    {
+        return 4;
+    }
+
+    @Override
+    public int getColumnCount()
+    {
+        return 1;
+    }
+
+    @Override
+    public Object getValueAt(int rowIndex, int columnIndex)
+    {
+        // Auxiliar object to store the values and returning them
+        Object aux;
+        
+        // Show the auxiliar user attribute depending on what column was asked for
+        switch (columnIndex)
+        {
+            case 0:
+                aux = operations.get("+");
+                break;
+            case 1:
+                aux = operations.get("-");
+                break;
+            case 2:
+                aux = operations.get("x");
+                break;            
+            default:
+                aux = operations.get("/");
+                break;
+        }
+        
+        return aux;
+    }
+
+    /**
+     * Compares the users for their MaxPunctuation order
+     * @param otherUser Other user to be compared with the one that this method belongs to
+     * @return Significative integer result of the comparing process
+     */
+    @Override
+    public int compareTo(User otherUser)
+    {
+        return Integer.compare(maxPunctuation, otherUser.getMaxPunctuation());
     }
     
 }

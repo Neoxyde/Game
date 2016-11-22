@@ -13,21 +13,29 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.table.AbstractTableModel;
 
 /**
  *
  * @author David Darío Del Prado González
  */
-public class Userbank
+public class Userbank extends AbstractTableModel
 {
 
     /**
      * Contains all the users, hashed by their names.
      */
     private HashMap<String, User> userList;
+    
+    /**
+     * Stores a sorted copy of the <ii>userList</ii>.
+     */
+    private ArrayList<User> sortedUserList;
 
     /**
      * JSON utility class to save data to a JSON file.
@@ -41,7 +49,9 @@ public class Userbank
 
     public Userbank()
     {
+        // Initialize the lists
         userList = new HashMap<>();
+        sortedUserList = new ArrayList<>();        
     }
 
     public Userbank(File file)
@@ -64,9 +74,10 @@ public class Userbank
             {
                 Logger.getLogger(Userbank.class.getName()).log(Level.SEVERE, null, ex);
             }
-            //Create the hashmap.
+            //Initialize the lists.
             userList = new HashMap<>();
-        }
+            sortedUserList = new ArrayList<>();
+        }        
     }
 
     /**
@@ -85,7 +96,14 @@ public class Userbank
             return false;
         } else
         {
-            userList.put(name, new User(name));
+            //Create a auxiliar User object
+            User newUser = new User(name);
+            
+            // Insert the new User in both lists
+            userList.put(name, newUser);
+            sortedUserList.add(newUser);
+            Collections.sort(sortedUserList, (user1, user2) -> Integer.compare(user2.getMaxPunctuation(), user1.getMaxPunctuation()));
+            
             return true;
         }
     }
@@ -128,6 +146,8 @@ public class Userbank
     {
         return userList;
     }
+    
+    //JSON utilities
 
     /**
      * Loads all the users from a JSON file.
@@ -145,16 +165,20 @@ public class Userbank
             //Set the line
             String line = input.readLine();
 
-            //Set the hashmap from the JSON file.
+            //Set the lists from the JSON file.
             if (line != null)
-            {
+            {                
                 userList = new Gson().fromJson(line, new TypeToken<HashMap<String, User>>()
                 {
                 }.getType());
+                
+                sortedUserList = new ArrayList<>(userList.values());
+                Collections.sort(sortedUserList, (user2, user1) -> (Integer.compare(user2.getMaxPunctuation(), user1.getMaxPunctuation())) * -1 );
             }
             else
             {
                 userList = new HashMap<>();
+                sortedUserList = new ArrayList<>();
             }
             
             //Close the reader.
@@ -202,5 +226,89 @@ public class Userbank
             Logger.getLogger(Userbank.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    
+    
+    //Table methods
+
+    @Override
+    public int getRowCount()
+    {
+        // Return the number of mapped users
+        return userList.size();
+    }
+
+    @Override
+    public int getColumnCount()
+    {
+        // Return the number of stats 
+        return User.GLOBAL_STATS_COUNT;
+    }
+
+    @Override
+    public Object getValueAt(int rowIndex, int columnIndex)
+    {
+        // Declare an auxiliar user variable for commodity.
+        User auxUser = sortedUserList.get(rowIndex);
+        
+        // Auxiliar object to store the values and returning them
+        Object o;
+        
+        // Show the auxiliar user attribute depending on what column was asked for
+        switch (columnIndex)
+        {
+            case 0:
+                o = auxUser.getName();
+                break;
+            case 1:
+                o = auxUser.getMaxPunctuation();
+                break;
+            case 2:
+                o = auxUser.getLastPunctuation();
+                break;
+            default:
+                o = auxUser.getTotalOperation();  
+                break;
+        }
+        
+        // Return the object
+        return o;
+    }
+
+    @Override
+    public boolean isCellEditable(int rowIndex, int columnIndex)
+    {
+        return false;
+    }
+
+    @Override
+    public String getColumnName(int column)
+    {
+        // Auxiliar String
+        String aux;
+        
+        // Assign the corresponding values to the auxiliar String
+        switch (column)
+        {
+            case 0:
+                aux = "Nombre";
+                break;
+            case 1:
+                aux = "Puntuación Máx.";
+                break;
+            case 2:
+                aux = "Última Puntuación";
+                break;
+            default:
+                aux = "Operaciones resueltas";
+                break;
+        }
+        
+        return aux;
+    }
+    
+    
+    
+    
 
 }
