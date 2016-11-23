@@ -150,13 +150,44 @@ public class User extends AbstractTableModel implements Comparable<User>
     @Override
     public int getRowCount()
     {
-        return 4;
+        return 1;
     }
 
     @Override
     public int getColumnCount()
     {
-        return 1;
+        return 4;
+    }
+
+    @Override
+    public boolean isCellEditable(int rowIndex, int columnIndex)
+    {
+        return false;
+    }
+
+    @Override
+    public String getColumnName(int column)
+    {
+        String aux = "";
+        switch (column)
+        {
+            case 0:
+                aux = "Sumas";
+                break;
+            case 1:
+                aux = "Restas";
+                break;
+            case 2:
+                aux = "Multiplicaciones";
+                break;
+            case 3:
+                aux = "Divisiones";
+                break;
+            default:
+                aux = "";
+                break;             
+        }
+        return aux;
     }
 
     @Override

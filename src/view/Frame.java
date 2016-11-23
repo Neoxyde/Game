@@ -93,6 +93,9 @@ public class Frame extends javax.swing.JFrame
         //Reference the auxiliar User object to the User stored in the model
         user = userbank.getUser(username);
         
+        // Set the UserStats View model
+        userStatsView.setTableModel(user);
+        
         //Swap to Menu JPanel
         cardLayout.show(cards, "Menu");
     }
@@ -125,8 +128,6 @@ public class Frame extends javax.swing.JFrame
     {
         //Swap to UserStats JPanel
         cardLayout.show(cards, "UserStats");
-        
-        //@TODO Load the user stats
     }
     
     /**
@@ -215,7 +216,7 @@ public class Frame extends javax.swing.JFrame
         playView    = new Play(this);
         menuView    = new Menu(this);
         globalStatsView = new GlobalStats(this);
-        userStatsView   = new UserStats();
+        userStatsView   = new UserStats(this);
                 
         //Reference the JPanel to the Frame's one
         cards = (JPanel) this.getContentPane();

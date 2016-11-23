@@ -13,11 +13,23 @@ public class UserStats extends javax.swing.JPanel
 {
 
     /**
+     * The frame that contains this panel, and acts as a controller to it.
+     */
+    private Frame controller;
+    
+    /**
      * Creates new form UserStats
      */
     public UserStats()
     {
         initComponents();
+    }
+    
+    public UserStats(Frame controller)
+    {
+        this();
+        
+        this.controller = controller;
     }
 
     /**
@@ -35,31 +47,86 @@ public class UserStats extends javax.swing.JPanel
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        lblUserName = new javax.swing.JLabel();
+        lblMaxScore = new javax.swing.JLabel();
+        lblLastScore = new javax.swing.JLabel();
+        lblResolvedOps = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        userStatsTable = new javax.swing.JTable();
+        jPanel3 = new javax.swing.JPanel();
+        btnBack = new javax.swing.JButton();
 
         setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.PAGE_AXIS));
 
         jPanel1.setLayout(new java.awt.GridBagLayout());
 
-        jLabel1.setText("jLabel1");
-        jPanel1.add(jLabel1, new java.awt.GridBagConstraints());
+        jLabel1.setText("Usuario");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(3, 0, 3, 0);
+        jPanel1.add(jLabel1, gridBagConstraints);
 
-        jLabel2.setText("jLabel2");
+        jLabel2.setText("Puntuacion Máxima");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(3, 0, 3, 0);
         jPanel1.add(jLabel2, gridBagConstraints);
 
-        jLabel3.setText("jLabel3");
-        jPanel1.add(jLabel3, new java.awt.GridBagConstraints());
+        jLabel3.setText("Ultima puntuacion");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(3, 0, 3, 0);
+        jPanel1.add(jLabel3, gridBagConstraints);
+
+        jLabel4.setText("Operaciones Resueltas");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(3, 0, 26, 0);
+        jPanel1.add(jLabel4, gridBagConstraints);
+
+        lblUserName.setText("jLabel5");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(3, 9, 3, 0);
+        jPanel1.add(lblUserName, gridBagConstraints);
+
+        lblMaxScore.setText("jLabel6");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(3, 9, 3, 0);
+        jPanel1.add(lblMaxScore, gridBagConstraints);
+
+        lblLastScore.setText("jLabel7");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(3, 9, 3, 0);
+        jPanel1.add(lblLastScore, gridBagConstraints);
+
+        lblResolvedOps.setText("jLabel8");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(3, 9, 26, 0);
+        jPanel1.add(lblResolvedOps, gridBagConstraints);
 
         add(jPanel1);
 
         jPanel2.setLayout(new javax.swing.BoxLayout(jPanel2, javax.swing.BoxLayout.LINE_AXIS));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        userStatsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][]
             {
                 {null, null, null, null},
@@ -72,21 +139,55 @@ public class UserStats extends javax.swing.JPanel
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(userStatsTable);
 
         jPanel2.add(jScrollPane1);
 
         add(jPanel2);
+
+        jPanel3.setLayout(new javax.swing.BoxLayout(jPanel3, javax.swing.BoxLayout.LINE_AXIS));
+
+        btnBack.setText("Volver");
+        btnBack.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btnBackActionPerformed(evt);
+            }
+        });
+        jPanel3.add(btnBack);
+
+        add(jPanel3);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnBackActionPerformed
+    {//GEN-HEADEREND:event_btnBackActionPerformed
+        controller.goToMenu();
+    }//GEN-LAST:event_btnBackActionPerformed
 
+    /**
+     * Sets the <code>User</code> that serves as model for the table
+     * @param user The User that serves as model for the table
+     */
+    void setTableModel(model.User user)
+    {
+        userStatsTable.setModel(user);
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBack;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JLabel lblLastScore;
+    private javax.swing.JLabel lblMaxScore;
+    private javax.swing.JLabel lblResolvedOps;
+    private javax.swing.JLabel lblUserName;
+    private javax.swing.JTable userStatsTable;
     // End of variables declaration//GEN-END:variables
 }

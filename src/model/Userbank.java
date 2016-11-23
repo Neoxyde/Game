@@ -306,9 +306,4 @@ public class Userbank extends AbstractTableModel
         
         return aux;
     }
-    
-    
-    
-    
-
 }
