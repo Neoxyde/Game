@@ -95,6 +95,7 @@ public class Frame extends javax.swing.JFrame
         
         // Set the UserStats View model
         userStatsView.setTableModel(user);
+        userStatsView.setUserName(user.getName());
         
         //Swap to Menu JPanel
         cardLayout.show(cards, "Menu");
@@ -117,6 +118,11 @@ public class Frame extends javax.swing.JFrame
         //Swap to Play JPanel
         cardLayout.show(cards, "Play");
         
+        game.reset();
+        
+        // Set game values
+        playView.setIsFirstOperation(true);
+        
         // Start the game
         createOperation();
     }
@@ -126,6 +132,9 @@ public class Frame extends javax.swing.JFrame
      */
     void goToUserStats()
     {
+        userStatsView.updateData(String.valueOf(user.getMaxPunctuation()), String.valueOf(user.getLastPunctuation()),
+                String.valueOf(user.getTotalResolvedOperations()), String.valueOf(user.getTotalOperations()));
+        
         //Swap to UserStats JPanel
         cardLayout.show(cards, "UserStats");
     }
@@ -174,11 +183,6 @@ public class Frame extends javax.swing.JFrame
     {
         if (answer == game.getSolution())
         {
-            /*
-                TODO Calculate the points based on how much time the user used to
-                calculate
-            */
-            
             if (isFirstOperation)
             {
                 // Add the operation points to the user's last score
@@ -201,7 +205,9 @@ public class Frame extends javax.swing.JFrame
         }
         else
         {
-            // TODO Logic for wrong anwser
+            user.addWrongOperation();
+            
+            goToUserStats();
         }
     }
     

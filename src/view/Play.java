@@ -207,6 +207,11 @@ public class Play extends javax.swing.JPanel
     private javax.swing.JTextField txtResult;
     // End of variables declaration//GEN-END:variables
 
+    public void setIsFirstOperation(boolean isFirstOperation)
+    {
+        this.isFirstOperation = isFirstOperation;
+    }
+
 
     
 }

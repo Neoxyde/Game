@@ -41,6 +41,11 @@ public class User extends AbstractTableModel implements Comparable<User>
     private HashMap<String, Integer> operations;
     
     /**
+     * The number of resolved operations
+     */
+    private int totalResolvedOperations;
+    
+    /**
      * The number of operations
      */
     private int totalOperations;
@@ -59,7 +64,7 @@ public class User extends AbstractTableModel implements Comparable<User>
         operations.put("-", 0);
         operations.put("x", 0);
         operations.put("/", 0);
-        totalOperations = 0;
+        totalResolvedOperations = 0;
     }
     
     /**
@@ -90,14 +95,19 @@ public class User extends AbstractTableModel implements Comparable<User>
         return lastPunctuation;
     }
 
-    public int getTotalOperation()
+    public int getTotalOperations()
     {
         return totalOperations;
     }
     
-    public int getResolvedOperation(String operation)
+    public int getResolvedOperations(String operation)
     {
         return operations.get(operation);
+    }
+    
+    public int getTotalResolvedOperations()
+    {
+        return totalResolvedOperations;        
     }
 
     public void setName(String name)
@@ -123,7 +133,7 @@ public class User extends AbstractTableModel implements Comparable<User>
 
     public void setTotalOperation(int totalOperation)
     {
-        this.totalOperations = totalOperation;
+        this.totalResolvedOperations = totalOperation;
     }
     
     /**
@@ -133,6 +143,7 @@ public class User extends AbstractTableModel implements Comparable<User>
     public void addResolvedOperation(String operation)
     {
         totalOperations++;
+        totalResolvedOperations++;
         
         //Overwrite the operation and add a resolved operation.
         operations.put(operation, (operations.get(operation) + 1));
@@ -168,7 +179,7 @@ public class User extends AbstractTableModel implements Comparable<User>
     @Override
     public String getColumnName(int column)
     {
-        String aux = "";
+        String aux;
         switch (column)
         {
             case 0:

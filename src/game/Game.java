@@ -13,7 +13,9 @@ import java.util.Random;
  */
 public class Game
 {
-    //Random utility class    
+    /**
+     * Random utility class
+     */   
     Random random;
     
     
@@ -82,27 +84,29 @@ public class Game
      */
     public void generateOperation()
     {
-        //Generate the operands
-        operand1 = difficulty/10 + random.nextInt(difficulty - difficulty/10);
-        operand2 = difficulty/10 + random.nextInt(difficulty - difficulty/10);
-        
         //Generate the operation
         operation = random.nextInt(4);
         
-        //Calculate the solution based on what operation was randomly generated.
+        solution = random.nextInt(difficulty - ((int)difficulty/10)) + difficulty;
+        
         switch (operation)
         {
             case OPERATION_ADD:
-                solution = operand1 + operand2;
+                operand1 = random.nextInt((int)(solution * 3f/4f) + 2);
+                operand2 = solution - operand1;
                 break;
             case OPERATION_SUB:
-                solution = operand1 - operand2;
+                operand1 = random.nextInt((int)(solution * 7f/5f) + 2);
+                operand2 = operand1 - solution;
                 break;
             case OPERATION_TIMES:
-                solution = operand1 * operand2;
+                // TODO finish operation generation algorithm
+                operand1 = random.nextInt((int)(solution / ((random.nextInt(solution / 2))))) + 2;
+                operand2 = operand1 * solution;
                 break;
             case OPERATION_DIV:
-                solution = (int) operand1 / operand2;
+                operand1 = random.nextInt((int)(solution * (random.nextFloat() + 1))) + solution;
+                operand2 = operand1 / solution;
                 break;
             default:
                 throw new AssertionError();
