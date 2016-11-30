@@ -169,7 +169,7 @@ public class UserStats extends javax.swing.JPanel
      * Sets the <code>User</code> that serves as model for the table
      * @param user The User that serves as model for the table
      */
-    void setTableModel(model.User user)
+    void showData(model.User user)
     {
         userStatsTable.setModel(user);
     }

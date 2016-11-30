@@ -168,7 +168,7 @@ public class User extends AbstractTableModel implements Comparable<User>
     @Override
     public String getColumnName(int column)
     {
-        String aux = "";
+        String aux;
         switch (column)
         {
             case 0:
@@ -207,12 +207,11 @@ public class User extends AbstractTableModel implements Comparable<User>
                 break;
             case 2:
                 aux = operations.get("x");
-                break;            
+                break;
             default:
                 aux = operations.get("/");
                 break;
         }
-        
         return aux;
     }
 

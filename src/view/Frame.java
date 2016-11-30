@@ -92,9 +92,9 @@ public class Frame extends javax.swing.JFrame
         
         //Reference the auxiliar User object to the User stored in the model
         user = userbank.getUser(username);
-        
-        // Set the UserStats View model
-        userStatsView.setTableModel(user);
+	
+	// Set the UserStats View model
+        userStatsView.showData(user);
         
         //Swap to Menu JPanel
         cardLayout.show(cards, "Menu");
