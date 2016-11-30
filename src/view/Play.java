@@ -196,7 +196,12 @@ public class Play extends javax.swing.JPanel
         isFirstOperation = false;
     }//GEN-LAST:event_btnSendActionPerformed
 
-
+    
+    void reset()
+    {
+	isFirstOperation = true;
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSend;
     private javax.swing.JLabel lblOperand1;

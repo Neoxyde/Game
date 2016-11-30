@@ -210,7 +210,15 @@ public class Frame extends javax.swing.JFrame
         }
         else
         {
-            // TODO Logic for wrong anwser
+	    if (isFirstOperation)
+	    {
+		user.setLastPunctuation(0);
+	    }
+            game.reset();
+	    playView.reset();
+	    user.addWrongOperation();
+	    userbank.sortUsers();
+	    goToUserStats();
         }
     }
     

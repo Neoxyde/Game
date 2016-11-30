@@ -102,10 +102,15 @@ public class Userbank extends AbstractTableModel
             // Insert the new User in both lists
             userList.put(name, newUser);
             sortedUserList.add(newUser);
-            Collections.sort(sortedUserList, (user1, user2) -> Integer.compare(user2.getMaxPunctuation(), user1.getMaxPunctuation()));
+            sortUsers();
             
             return true;
         }
+    }
+    
+    public void sortUsers()
+    {
+	Collections.sort(sortedUserList, (user2, user1) -> (Integer.compare(user2.getMaxPunctuation(), user1.getMaxPunctuation())) * -1 );
     }
 
     /**
@@ -173,7 +178,7 @@ public class Userbank extends AbstractTableModel
                 }.getType());
                 
                 sortedUserList = new ArrayList<>(userList.values());
-                Collections.sort(sortedUserList, (user2, user1) -> (Integer.compare(user2.getMaxPunctuation(), user1.getMaxPunctuation())) * -1 );
+                sortUsers();
             }
             else
             {
