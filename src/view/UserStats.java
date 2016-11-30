@@ -52,6 +52,8 @@ public class UserStats extends javax.swing.JPanel
         lblMaxScore = new javax.swing.JLabel();
         lblLastScore = new javax.swing.JLabel();
         lblResolvedOps = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        lblTotalOperations = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         userStatsTable = new javax.swing.JTable();
@@ -89,7 +91,7 @@ public class UserStats extends javax.swing.JPanel
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-        gridBagConstraints.insets = new java.awt.Insets(3, 0, 26, 0);
+        gridBagConstraints.insets = new java.awt.Insets(3, 0, 3, 0);
         jPanel1.add(jLabel4, gridBagConstraints);
 
         lblUserName.setText("jLabel5");
@@ -119,8 +121,23 @@ public class UserStats extends javax.swing.JPanel
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.weightx = 0.1;
-        gridBagConstraints.insets = new java.awt.Insets(3, 9, 26, 0);
+        gridBagConstraints.insets = new java.awt.Insets(3, 9, 3, 0);
         jPanel1.add(lblResolvedOps, gridBagConstraints);
+
+        jLabel5.setText("Operaciones Totales");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(3, 0, 25, 0);
+        jPanel1.add(jLabel5, gridBagConstraints);
+
+        lblTotalOperations.setText("jLabel6");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.insets = new java.awt.Insets(3, 9, 25, 0);
+        jPanel1.add(lblTotalOperations, gridBagConstraints);
 
         add(jPanel1);
 
@@ -169,9 +186,18 @@ public class UserStats extends javax.swing.JPanel
      * Sets the <code>User</code> that serves as model for the table
      * @param user The User that serves as model for the table
      */
-    void showData(model.User user)
+    void showData(String username, String maxScore, String lastScore, String maxOps, String totalOps)
     {
-        userStatsTable.setModel(user);
+	lblUserName.setText(username);
+	lblMaxScore.setText(maxScore);
+	lblLastScore.setText(lastScore);
+	lblResolvedOps.setText(maxOps);
+	lblTotalOperations.setText(totalOps);
+    }
+    
+    void setTableModel(model.User user)
+    {
+	userStatsTable.setModel(user);
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -180,6 +206,7 @@ public class UserStats extends javax.swing.JPanel
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -187,6 +214,7 @@ public class UserStats extends javax.swing.JPanel
     private javax.swing.JLabel lblLastScore;
     private javax.swing.JLabel lblMaxScore;
     private javax.swing.JLabel lblResolvedOps;
+    private javax.swing.JLabel lblTotalOperations;
     private javax.swing.JLabel lblUserName;
     private javax.swing.JTable userStatsTable;
     // End of variables declaration//GEN-END:variables

@@ -267,7 +267,7 @@ public class Userbank extends AbstractTableModel
                 o = auxUser.getLastPunctuation();
                 break;
             default:
-                o = auxUser.getTotalOperation();  
+                o = auxUser.getTotalOperations();  
                 break;
         }
         

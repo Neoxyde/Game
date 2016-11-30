@@ -90,14 +90,14 @@ public class User extends AbstractTableModel implements Comparable<User>
         return lastPunctuation;
     }
 
-    public int getTotalOperation()
+    public int getTotalOperations()
     {
         return totalOperations;
     }
     
-    public int getResolvedOperation(String operation)
+    public int getResolvedOperations()
     {
-        return operations.get(operation);
+        return operations.get("+") + operations.get("-") + operations.get("/") + operations.get("x");
     }
 
     public void setName(String name)

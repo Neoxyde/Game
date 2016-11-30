@@ -94,7 +94,7 @@ public class Frame extends javax.swing.JFrame
         user = userbank.getUser(username);
 	
 	// Set the UserStats View model
-        userStatsView.showData(user);
+        userStatsView.setTableModel(user);
         
         //Swap to Menu JPanel
         cardLayout.show(cards, "Menu");
@@ -107,6 +107,11 @@ public class Frame extends javax.swing.JFrame
         
         //Swap to the Start JPanel
         cardLayout.show(cards, "Start");
+    }
+    
+    void exit()
+    {
+	this.dispose();
     }
     
     /**
@@ -126,6 +131,10 @@ public class Frame extends javax.swing.JFrame
      */
     void goToUserStats()
     {
+	userStatsView.showData(user.getName(), String.valueOf(user.getMaxPunctuation()), 
+		String.valueOf(user.getLastPunctuation()), String.valueOf(user.getResolvedOperations()),
+		String.valueOf(user.getTotalOperations()));
+	
         //Swap to UserStats JPanel
         cardLayout.show(cards, "UserStats");
     }
