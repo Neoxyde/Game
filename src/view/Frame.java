@@ -111,6 +111,7 @@ public class Frame extends javax.swing.JFrame
     
     void exit()
     {
+	userbank.saveToJSON();
 	this.dispose();
     }
     

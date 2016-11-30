@@ -122,6 +122,13 @@ public class Menu extends javax.swing.JPanel
 
         btnExit.setText("Salir");
         btnExit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnExit.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btnExitActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;
@@ -161,6 +168,11 @@ public class Menu extends javax.swing.JPanel
         //Call the controller logOut method
         controller.logOut();
     }//GEN-LAST:event_btnLogoutActionPerformed
+
+    private void btnExitActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnExitActionPerformed
+    {//GEN-HEADEREND:event_btnExitActionPerformed
+        controller.exit();
+    }//GEN-LAST:event_btnExitActionPerformed
     
     public void setLblGreetingsText(String text)
     {
