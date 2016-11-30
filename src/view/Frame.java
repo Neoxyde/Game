@@ -206,7 +206,7 @@ public class Frame extends javax.swing.JFrame
         else
         {
             user.addWrongOperation();
-            
+            game.reset();
             goToUserStats();
         }
     }
